@@ -30,7 +30,8 @@ for i in pkg_details:
 			if itm.text.find('모집금액') > 0:
 				m_details_2 = itm.text.replace("- 모집금액 ", "").replace("원", "").replace(",", "")
 	m_details = int(m_details_2) / int(m_details_1) * 100
-	m_dtls.append(m_title[idx] + '\t' + '{:3.0f}%'.format(m_details))
+	if m_details_1 != m_details_2:
+		m_dtls.append(m_title[idx] + '\t' + '{:3.0f}%'.format(m_details))
 	idx=idx+1
 
 for itm in m_dtls:
