@@ -13,7 +13,7 @@ data = json.loads(a.read().decode())
 
 #print(data)
 
-for title in data:
+for title in data['investGoodsList']:
 	if title['investTotalMoney'] != title['finalMoney']: 
 		print('{:10} {:3.0f}%'.format(title['title'], title['investTotalMoney']/title['finalMoney']*100))
 print("-------------------------------------")
