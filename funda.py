@@ -1,7 +1,7 @@
 import bs4, requests
 
 def get_beautiful_soup(url):
-    return bs4.BeautifulSoup(requests.get(url).text, "html5lib")
+	return bs4.BeautifulSoup(requests.get(url).text, "html5lib")
 
 soup = get_beautiful_soup('https://www.funda.kr/v2/investment')
 #print(soup.prettify())
@@ -28,19 +28,28 @@ for i in pkg_details:
 
 idx = 0
 for i in progress:
-	#amt = i.find_all("span", "pull-left")
-	#m_list = amt[0].text
 	ratio = i.find_all("span", "pull-right")
 	m_list = ratio[0].text.replace('\n','').replace('\r','')
 	if m_list != '100%':
-		m_name.append(m_dtls[idx] + " / " + m_list)
+		m_name.append(m_dtls[idx] + ' ' + m_list)
 	idx=idx+1
 
-for i in m_name:
-	print(i)
+#for i in m_name:
+	#print(i)
 
-print("-------------------------------------")
+#print("-------------------------------------")
+
+import ui
+
+f = (0, 0, 95, 300)
+tbl = ui.TableView(frame=f, name='펀다')
+tbl.width, tbl.height = 95, 270
+
+tbl.data_source = ui.ListDataSource(items=m_name)
+tbl.data_source.font=('<system>',14)
+tbl.row_height=30
+tbl.separator_color='lightblue'
+tbl.present('sheet', title_bar_color = 'lightblue')
 #for i in range(0,count):
 #	print(m_name)
 
-# See: http://www.crummy.com/software/BeautifulSoup/bs4/doc for all the things you can do with the soup.
